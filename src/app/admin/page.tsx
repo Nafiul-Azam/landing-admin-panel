@@ -7,6 +7,7 @@ import {
   BarChart3,
   CalendarCheck,
   Globe,
+  HeartPulse,
   LayoutDashboard,
   Settings,
   Stethoscope,
@@ -332,6 +333,13 @@ const adminCards = [
     href: "/admin/appointments",
     icon: CalendarCheck,
     value: "8.2k",
+  },
+  {
+    title: "Services",
+    description: "Manage clinic service list, prices, and website visibility.",
+    href: "/admin/services",
+    icon: HeartPulse,
+    value: "18",
   },
   {
     title: "Website Control",
@@ -844,7 +852,7 @@ export default function AdminHomePage() {
       </section>
 
       {/* Admin Navigation Cards */}
-      <section className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-6">
+      <section className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-7">
         {adminCards.map((card) => {
           const Icon = card.icon;
           return (
