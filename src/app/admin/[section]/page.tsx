@@ -317,18 +317,66 @@ const defaultWebsiteProgress: WebsiteProgress = {
 };
 
 const initialWebsiteMetrics: WebsiteMetric[] = [
-  { id: "metric-1", label: "পেশেন্ট ভর্তি", value: "১২৪", trend: "-০.১%", direction: "down" },
-  { id: "metric-2", label: "সফল অপারেশন", value: "৪৬", trend: "+০.১%", direction: "up" },
-  { id: "metric-3", label: "টেস্ট সংখ্যা", value: "২২২", trend: "+২৬৬.৭%", direction: "up" },
+  {
+    id: "metric-1",
+    label: "পেশেন্ট ভর্তি",
+    value: "১২৪",
+    trend: "-০.১%",
+    direction: "down",
+  },
+  {
+    id: "metric-2",
+    label: "সফল অপারেশন",
+    value: "৪৬",
+    trend: "+০.১%",
+    direction: "up",
+  },
+  {
+    id: "metric-3",
+    label: "টেস্ট সংখ্যা",
+    value: "২২২",
+    trend: "+২৬৬.৭%",
+    direction: "up",
+  },
 ];
 
 const initialWebsiteContacts: WebsiteContact[] = [
-  { id: "contact-1", label: "Facebook", value: "Facebook Page", link: "https://facebook.com" },
-  { id: "contact-2", label: "YouTube", value: "YouTube Channel", link: "https://youtube.com" },
-  { id: "contact-3", label: "WhatsApp", value: "+8801700000000", link: "https://wa.me/8801700000000" },
-  { id: "contact-4", label: "Call", value: "09600-000000", link: "tel:09600000000" },
-  { id: "contact-5", label: "Google Maps", value: "Main Branch", link: "https://maps.google.com" },
-  { id: "contact-6", label: "Gmail", value: "info@clinic.test", link: "mailto:info@clinic.test" },
+  {
+    id: "contact-1",
+    label: "Facebook",
+    value: "Facebook Page",
+    link: "https://facebook.com",
+  },
+  {
+    id: "contact-2",
+    label: "YouTube",
+    value: "YouTube Channel",
+    link: "https://youtube.com",
+  },
+  {
+    id: "contact-3",
+    label: "WhatsApp",
+    value: "+8801700000000",
+    link: "https://wa.me/8801700000000",
+  },
+  {
+    id: "contact-4",
+    label: "Call",
+    value: "09600-000000",
+    link: "tel:09600000000",
+  },
+  {
+    id: "contact-5",
+    label: "Google Maps",
+    value: "Main Branch",
+    link: "https://maps.google.com",
+  },
+  {
+    id: "contact-6",
+    label: "Gmail",
+    value: "info@clinic.test",
+    link: "mailto:info@clinic.test",
+  },
 ];
 
 const initialWebsiteLocations: WebsiteLocation[] = [
@@ -360,7 +408,8 @@ const initialWebsitePosts: WebsitePost[] = [
     id: "post-1",
     type: "Health Tip",
     title: "MRI করার আগে যেসব বিষয় জানা দরকার",
-    summary: "পরীক্ষার প্রস্তুতি, সময় এবং রিপোর্ট নিয়ে রোগীদের জন্য সংক্ষিপ্ত গাইড।",
+    summary:
+      "পরীক্ষার প্রস্তুতি, সময় এবং রিপোর্ট নিয়ে রোগীদের জন্য সংক্ষিপ্ত গাইড।",
     link: "/health-tips/mri-preparation",
   },
   {
@@ -373,7 +422,11 @@ const initialWebsitePosts: WebsitePost[] = [
 ];
 
 const initialGalleryCategories: GalleryCategory[] = [
-  { id: "gallery-1", name: "রিসিপশন কর্নার", subtitle: "রোগীদের বসার আধুনিক ও আরামদায়ক স্থান" },
+  {
+    id: "gallery-1",
+    name: "রিসিপশন কর্নার",
+    subtitle: "রোগীদের বসার আধুনিক ও আরামদায়ক স্থান",
+  },
   { id: "gallery-2", name: "ডাক্তার ও নার্স", subtitle: "নিবেদিত সেবা টিম" },
   { id: "gallery-3", name: "রোগী ও সেবা", subtitle: "যত্ন ও মানবিক সহায়তা" },
 ];
@@ -1383,22 +1436,25 @@ function WebsiteControlPanel() {
   }
 
   function openContactModal(contact?: WebsiteContact) {
-    const draft =
-      contact || { id: `contact-${Date.now()}`, label: "", value: "", link: "" };
+    const draft = contact || {
+      id: `contact-${Date.now()}`,
+      label: "",
+      value: "",
+      link: "",
+    };
     setContactDraft(draft);
     setEditingId(contact?.id || null);
     setActiveModal("contact");
   }
 
   function openLocationModal(location?: WebsiteLocation) {
-    const draft =
-      location || {
-        id: `location-${Date.now()}`,
-        name: "",
-        address: "",
-        mapLink: "",
-        callLink: "",
-      };
+    const draft = location || {
+      id: `location-${Date.now()}`,
+      name: "",
+      address: "",
+      mapLink: "",
+      callLink: "",
+    };
     setLocationDraft(draft);
     setEditingId(location?.id || null);
     setActiveModal("location");
@@ -1412,36 +1468,37 @@ function WebsiteControlPanel() {
   }
 
   function openPostModal(post?: WebsitePost) {
-    const draft =
-      post || {
-        id: `post-${Date.now()}`,
-        type: "Blog" as const,
-        title: "",
-        summary: "",
-        link: "",
-      };
+    const draft = post || {
+      id: `post-${Date.now()}`,
+      type: "Blog" as const,
+      title: "",
+      summary: "",
+      link: "",
+    };
     setPostDraft(draft);
     setEditingId(post?.id || null);
     setActiveModal("post");
   }
 
   function openCategoryModal(category?: GalleryCategory) {
-    const draft =
-      category || { id: `gallery-${Date.now()}`, name: "", subtitle: "" };
+    const draft = category || {
+      id: `gallery-${Date.now()}`,
+      name: "",
+      subtitle: "",
+    };
     setCategoryDraft(draft);
     setEditingId(category?.id || null);
     setActiveModal("galleryCategory");
   }
 
   function openImageModal(image?: GalleryImage) {
-    const draft =
-      image || {
-        id: `image-${Date.now()}`,
-        categoryId: galleryCategories[0]?.id || "",
-        title: "",
-        imageUrl: "",
-        link: "",
-      };
+    const draft = image || {
+      id: `image-${Date.now()}`,
+      categoryId: galleryCategories[0]?.id || "",
+      title: "",
+      imageUrl: "",
+      link: "",
+    };
     setImageDraft(draft);
     setEditingId(image?.id || null);
     setActiveModal("galleryImage");
@@ -1539,7 +1596,9 @@ function WebsiteControlPanel() {
     if (activeModal === "galleryImage") {
       setGalleryImages((previous) =>
         editingId
-          ? previous.map((image) => (image.id === editingId ? imageDraft : image))
+          ? previous.map((image) =>
+              image.id === editingId ? imageDraft : image,
+            )
           : [imageDraft, ...previous],
       );
       closeModal("Gallery picture saved successfully");
@@ -1547,15 +1606,22 @@ function WebsiteControlPanel() {
   }
 
   function deleteWebsiteItem(kind: string, id: string) {
-    if (kind === "contact") setContacts((items) => items.filter((item) => item.id !== id));
-    if (kind === "location") setLocations((items) => items.filter((item) => item.id !== id));
-    if (kind === "footer") setFooterLinks((items) => items.filter((item) => item.id !== id));
-    if (kind === "post") setPosts((items) => items.filter((item) => item.id !== id));
+    if (kind === "contact")
+      setContacts((items) => items.filter((item) => item.id !== id));
+    if (kind === "location")
+      setLocations((items) => items.filter((item) => item.id !== id));
+    if (kind === "footer")
+      setFooterLinks((items) => items.filter((item) => item.id !== id));
+    if (kind === "post")
+      setPosts((items) => items.filter((item) => item.id !== id));
     if (kind === "category") {
       setGalleryCategories((items) => items.filter((item) => item.id !== id));
-      setGalleryImages((items) => items.filter((item) => item.categoryId !== id));
+      setGalleryImages((items) =>
+        items.filter((item) => item.categoryId !== id),
+      );
     }
-    if (kind === "image") setGalleryImages((items) => items.filter((item) => item.id !== id));
+    if (kind === "image")
+      setGalleryImages((items) => items.filter((item) => item.id !== id));
     showToast("Item removed successfully");
   }
 
@@ -1673,8 +1739,13 @@ function WebsiteControlPanel() {
 
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {metrics.map((metric) => (
-            <div key={metric.id} className="rounded-2xl border border-slate-200 p-4">
-              <p className="text-sm font-black text-slate-950">{metric.label}</p>
+            <div
+              key={metric.id}
+              className="rounded-2xl border border-slate-200 p-4"
+            >
+              <p className="text-sm font-black text-slate-950">
+                {metric.label}
+              </p>
               <div className="mt-3 flex items-end justify-between gap-3">
                 <p className="text-3xl font-black text-slate-950">
                   {metric.value}
@@ -1726,7 +1797,10 @@ function WebsiteControlPanel() {
 
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {contacts.map((contact) => (
-              <div key={contact.id} className="rounded-2xl border border-slate-200 p-3">
+              <div
+                key={contact.id}
+                className="rounded-2xl border border-slate-200 p-3"
+              >
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
                   {contact.label.toLowerCase().includes("mail") ? (
                     <Mail className="h-5 w-5" />
@@ -1784,9 +1858,14 @@ function WebsiteControlPanel() {
             </div>
             <div className="mt-4 space-y-3">
               {locations.map((location) => (
-                <div key={location.id} className="rounded-2xl border border-slate-200 p-3">
+                <div
+                  key={location.id}
+                  className="rounded-2xl border border-slate-200 p-3"
+                >
                   <p className="font-black text-slate-950">{location.name}</p>
-                  <p className="mt-1 text-sm text-slate-500">{location.address}</p>
+                  <p className="mt-1 text-sm text-slate-500">
+                    {location.address}
+                  </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     <button
                       type="button"
@@ -1871,7 +1950,10 @@ function WebsiteControlPanel() {
         </div>
         <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {posts.map((post) => (
-            <div key={post.id} className="rounded-2xl border border-slate-200 p-4">
+            <div
+              key={post.id}
+              className="rounded-2xl border border-slate-200 p-4"
+            >
               <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-black text-teal-700">
                 {post.type}
               </span>
@@ -1914,7 +1996,8 @@ function WebsiteControlPanel() {
                 আমাদের সেবার মুহূর্ত
               </h2>
               <p className="mt-1 text-sm text-slate-500">
-                Category add/remove, picture upload/link, device upload সব এক জায়গায়।
+                Category add/remove, picture upload/link, device upload সব এক
+                জায়গায়।
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -1942,11 +2025,18 @@ function WebsiteControlPanel() {
               <div key={category.id}>
                 <div className="flex items-center justify-between gap-3">
                   <div>
-                    <h3 className="font-black text-slate-950">{category.name}</h3>
-                    <p className="text-xs text-slate-500">{category.subtitle}</p>
+                    <h3 className="font-black text-slate-950">
+                      {category.name}
+                    </h3>
+                    <p className="text-xs text-slate-500">
+                      {category.subtitle}
+                    </p>
                   </div>
                   <div className="flex gap-2">
-                    <button type="button" onClick={() => openCategoryModal(category)}>
+                    <button
+                      type="button"
+                      onClick={() => openCategoryModal(category)}
+                    >
                       <Pencil className="h-4 w-4 text-slate-500" />
                     </button>
                     <button
@@ -1984,7 +2074,9 @@ function WebsiteControlPanel() {
                             </button>
                             <button
                               type="button"
-                              onClick={() => deleteWebsiteItem("image", image.id)}
+                              onClick={() =>
+                                deleteWebsiteItem("image", image.id)
+                              }
                               className="rounded-xl border border-red-100 px-3 py-2 text-xs font-black text-red-600 transition hover:bg-red-50"
                             >
                               Delete
@@ -2030,36 +2122,129 @@ function WebsiteControlPanel() {
             <form onSubmit={saveWebsiteModal} className="space-y-4 p-4">
               {activeModal === "hero" ? (
                 <>
-                  <TextInput label="Badge" value={heroDraft.badge} onChange={(value) => setHeroDraft((prev) => ({ ...prev, badge: value }))} />
-                  <TextInput label="Hero Title" value={heroDraft.title} onChange={(value) => setHeroDraft((prev) => ({ ...prev, title: value }))} />
-                  <TextInput label="Highlight Title" value={heroDraft.highlight} onChange={(value) => setHeroDraft((prev) => ({ ...prev, highlight: value }))} />
-                  <TextAreaInput label="Description" value={heroDraft.description} onChange={(value) => setHeroDraft((prev) => ({ ...prev, description: value }))} />
+                  <TextInput
+                    label="Badge"
+                    value={heroDraft.badge}
+                    onChange={(value) =>
+                      setHeroDraft((prev) => ({ ...prev, badge: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Hero Title"
+                    value={heroDraft.title}
+                    onChange={(value) =>
+                      setHeroDraft((prev) => ({ ...prev, title: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Highlight Title"
+                    value={heroDraft.highlight}
+                    onChange={(value) =>
+                      setHeroDraft((prev) => ({ ...prev, highlight: value }))
+                    }
+                  />
+                  <TextAreaInput
+                    label="Description"
+                    value={heroDraft.description}
+                    onChange={(value) =>
+                      setHeroDraft((prev) => ({ ...prev, description: value }))
+                    }
+                  />
                 </>
               ) : null}
 
               {activeModal === "heroCard" ? (
                 <>
-                  <TextInput label="Card Badge" value={cardDraft.badge} onChange={(value) => setCardDraft((prev) => ({ ...prev, badge: value }))} />
-                  <TextInput label="Card Title" value={cardDraft.title} onChange={(value) => setCardDraft((prev) => ({ ...prev, title: value }))} />
-                  <TextAreaInput label="Card Text" value={cardDraft.description} onChange={(value) => setCardDraft((prev) => ({ ...prev, description: value }))} />
-                  <TextInput label="Picture Link" value={cardDraft.imageUrl} onChange={(value) => setCardDraft((prev) => ({ ...prev, imageUrl: value }))} />
+                  <TextInput
+                    label="Card Badge"
+                    value={cardDraft.badge}
+                    onChange={(value) =>
+                      setCardDraft((prev) => ({ ...prev, badge: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Card Title"
+                    value={cardDraft.title}
+                    onChange={(value) =>
+                      setCardDraft((prev) => ({ ...prev, title: value }))
+                    }
+                  />
+                  <TextAreaInput
+                    label="Card Text"
+                    value={cardDraft.description}
+                    onChange={(value) =>
+                      setCardDraft((prev) => ({ ...prev, description: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Picture Link"
+                    value={cardDraft.imageUrl}
+                    onChange={(value) =>
+                      setCardDraft((prev) => ({ ...prev, imageUrl: value }))
+                    }
+                  />
                   <label className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-black text-slate-700 transition hover:bg-slate-50">
                     <ImagePlus className="h-4 w-4" />
                     Upload From Device
-                    <input type="file" accept="image/*" className="hidden" onChange={(event) => readImageFile(event, (url) => setCardDraft((prev) => ({ ...prev, imageUrl: url })))} />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(event) =>
+                        readImageFile(event, (url) =>
+                          setCardDraft((prev) => ({ ...prev, imageUrl: url })),
+                        )
+                      }
+                    />
                   </label>
                 </>
               ) : null}
 
               {activeModal === "progress" ? (
                 <>
-                  <TextInput label="Small Title" value={progressDraft.badge} onChange={(value) => setProgressDraft((prev) => ({ ...prev, badge: value }))} />
-                  <TextInput label="Main Title" value={progressDraft.title} onChange={(value) => setProgressDraft((prev) => ({ ...prev, title: value }))} />
-                  <TextAreaInput label="Description" value={progressDraft.description} onChange={(value) => setProgressDraft((prev) => ({ ...prev, description: value }))} />
+                  <TextInput
+                    label="Small Title"
+                    value={progressDraft.badge}
+                    onChange={(value) =>
+                      setProgressDraft((prev) => ({ ...prev, badge: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Main Title"
+                    value={progressDraft.title}
+                    onChange={(value) =>
+                      setProgressDraft((prev) => ({ ...prev, title: value }))
+                    }
+                  />
+                  <TextAreaInput
+                    label="Description"
+                    value={progressDraft.description}
+                    onChange={(value) =>
+                      setProgressDraft((prev) => ({
+                        ...prev,
+                        description: value,
+                      }))
+                    }
+                  />
                   <label className="block">
-                    <span className="text-xs font-black uppercase tracking-[0.12em] text-slate-500">Time Limit</span>
-                    <select value={progressDraft.showDuration} onChange={(event) => setProgressDraft((prev) => ({ ...prev, showDuration: event.target.value as ShowDuration }))} className="mt-1 h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-bold outline-none focus:border-teal-500">
-                      {showDurationOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
+                    <span className="text-xs font-black uppercase tracking-[0.12em] text-slate-500">
+                      Time Limit
+                    </span>
+                    <select
+                      value={progressDraft.showDuration}
+                      onChange={(event) =>
+                        setProgressDraft((prev) => ({
+                          ...prev,
+                          showDuration: event.target.value as ShowDuration,
+                        }))
+                      }
+                      className="mt-1 h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-bold outline-none focus:border-teal-500"
+                    >
+                      {showDurationOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
                     </select>
                   </label>
                 </>
@@ -2067,12 +2252,41 @@ function WebsiteControlPanel() {
 
               {activeModal === "metric" ? (
                 <>
-                  <TextInput label="Metric Label" value={metricDraft.label} onChange={(value) => setMetricDraft((prev) => ({ ...prev, label: value }))} />
-                  <TextInput label="Value" value={metricDraft.value} onChange={(value) => setMetricDraft((prev) => ({ ...prev, value }))} />
-                  <TextInput label="Trend" value={metricDraft.trend} onChange={(value) => setMetricDraft((prev) => ({ ...prev, trend: value }))} />
+                  <TextInput
+                    label="Metric Label"
+                    value={metricDraft.label}
+                    onChange={(value) =>
+                      setMetricDraft((prev) => ({ ...prev, label: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Value"
+                    value={metricDraft.value}
+                    onChange={(value) =>
+                      setMetricDraft((prev) => ({ ...prev, value }))
+                    }
+                  />
+                  <TextInput
+                    label="Trend"
+                    value={metricDraft.trend}
+                    onChange={(value) =>
+                      setMetricDraft((prev) => ({ ...prev, trend: value }))
+                    }
+                  />
                   <label className="block">
-                    <span className="text-xs font-black uppercase tracking-[0.12em] text-slate-500">Direction</span>
-                    <select value={metricDraft.direction} onChange={(event) => setMetricDraft((prev) => ({ ...prev, direction: event.target.value as "up" | "down" }))} className="mt-1 h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-bold outline-none focus:border-teal-500">
+                    <span className="text-xs font-black uppercase tracking-[0.12em] text-slate-500">
+                      Direction
+                    </span>
+                    <select
+                      value={metricDraft.direction}
+                      onChange={(event) =>
+                        setMetricDraft((prev) => ({
+                          ...prev,
+                          direction: event.target.value as "up" | "down",
+                        }))
+                      }
+                      className="mt-1 h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-bold outline-none focus:border-teal-500"
+                    >
                       <option value="up">Up</option>
                       <option value="down">Down</option>
                     </select>
@@ -2082,66 +2296,205 @@ function WebsiteControlPanel() {
 
               {activeModal === "contact" ? (
                 <>
-                  <TextInput label="Contact Name" value={contactDraft.label} placeholder="Facebook / WhatsApp / Call" onChange={(value) => setContactDraft((prev) => ({ ...prev, label: value }))} />
-                  <TextInput label="Display Text" value={contactDraft.value} onChange={(value) => setContactDraft((prev) => ({ ...prev, value }))} />
-                  <TextInput label="Link" value={contactDraft.link} placeholder="https:// / tel: / mailto:" onChange={(value) => setContactDraft((prev) => ({ ...prev, link: value }))} />
+                  <TextInput
+                    label="Contact Name"
+                    value={contactDraft.label}
+                    placeholder="Facebook / WhatsApp / Call"
+                    onChange={(value) =>
+                      setContactDraft((prev) => ({ ...prev, label: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Display Text"
+                    value={contactDraft.value}
+                    onChange={(value) =>
+                      setContactDraft((prev) => ({ ...prev, value }))
+                    }
+                  />
+                  <TextInput
+                    label="Link"
+                    value={contactDraft.link}
+                    placeholder="https:// / tel: / mailto:"
+                    onChange={(value) =>
+                      setContactDraft((prev) => ({ ...prev, link: value }))
+                    }
+                  />
                 </>
               ) : null}
 
               {activeModal === "location" ? (
                 <>
-                  <TextInput label="Branch Name" value={locationDraft.name} onChange={(value) => setLocationDraft((prev) => ({ ...prev, name: value }))} />
-                  <TextAreaInput label="Address" value={locationDraft.address} onChange={(value) => setLocationDraft((prev) => ({ ...prev, address: value }))} />
-                  <TextInput label="Map Link" value={locationDraft.mapLink} onChange={(value) => setLocationDraft((prev) => ({ ...prev, mapLink: value }))} />
-                  <TextInput label="Call Link" value={locationDraft.callLink} onChange={(value) => setLocationDraft((prev) => ({ ...prev, callLink: value }))} />
+                  <TextInput
+                    label="Branch Name"
+                    value={locationDraft.name}
+                    onChange={(value) =>
+                      setLocationDraft((prev) => ({ ...prev, name: value }))
+                    }
+                  />
+                  <TextAreaInput
+                    label="Address"
+                    value={locationDraft.address}
+                    onChange={(value) =>
+                      setLocationDraft((prev) => ({ ...prev, address: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Map Link"
+                    value={locationDraft.mapLink}
+                    onChange={(value) =>
+                      setLocationDraft((prev) => ({ ...prev, mapLink: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Call Link"
+                    value={locationDraft.callLink}
+                    onChange={(value) =>
+                      setLocationDraft((prev) => ({ ...prev, callLink: value }))
+                    }
+                  />
                 </>
               ) : null}
 
               {activeModal === "footer" ? (
                 <>
-                  <TextInput label="Page Title" value={footerDraft.label} onChange={(value) => setFooterDraft((prev) => ({ ...prev, label: value }))} />
-                  <TextInput label="Page Link" value={footerDraft.href} onChange={(value) => setFooterDraft((prev) => ({ ...prev, href: value }))} />
+                  <TextInput
+                    label="Page Title"
+                    value={footerDraft.label}
+                    onChange={(value) =>
+                      setFooterDraft((prev) => ({ ...prev, label: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Page Link"
+                    value={footerDraft.href}
+                    onChange={(value) =>
+                      setFooterDraft((prev) => ({ ...prev, href: value }))
+                    }
+                  />
                 </>
               ) : null}
 
               {activeModal === "post" ? (
                 <>
                   <label className="block">
-                    <span className="text-xs font-black uppercase tracking-[0.12em] text-slate-500">Content Type</span>
-                    <select value={postDraft.type} onChange={(event) => setPostDraft((prev) => ({ ...prev, type: event.target.value as WebsitePost["type"] }))} className="mt-1 h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-bold outline-none focus:border-teal-500">
+                    <span className="text-xs font-black uppercase tracking-[0.12em] text-slate-500">
+                      Content Type
+                    </span>
+                    <select
+                      value={postDraft.type}
+                      onChange={(event) =>
+                        setPostDraft((prev) => ({
+                          ...prev,
+                          type: event.target.value as WebsitePost["type"],
+                        }))
+                      }
+                      className="mt-1 h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-bold outline-none focus:border-teal-500"
+                    >
                       <option value="Blog">Blog</option>
                       <option value="Article">Article</option>
                       <option value="Health Tip">Health Tip</option>
                     </select>
                   </label>
-                  <TextInput label="Title" value={postDraft.title} onChange={(value) => setPostDraft((prev) => ({ ...prev, title: value }))} />
-                  <TextAreaInput label="Summary" value={postDraft.summary} onChange={(value) => setPostDraft((prev) => ({ ...prev, summary: value }))} />
-                  <TextInput label="Link" value={postDraft.link} onChange={(value) => setPostDraft((prev) => ({ ...prev, link: value }))} />
+                  <TextInput
+                    label="Title"
+                    value={postDraft.title}
+                    onChange={(value) =>
+                      setPostDraft((prev) => ({ ...prev, title: value }))
+                    }
+                  />
+                  <TextAreaInput
+                    label="Summary"
+                    value={postDraft.summary}
+                    onChange={(value) =>
+                      setPostDraft((prev) => ({ ...prev, summary: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Link"
+                    value={postDraft.link}
+                    onChange={(value) =>
+                      setPostDraft((prev) => ({ ...prev, link: value }))
+                    }
+                  />
                 </>
               ) : null}
 
               {activeModal === "galleryCategory" ? (
                 <>
-                  <TextInput label="Category Name" value={categoryDraft.name} onChange={(value) => setCategoryDraft((prev) => ({ ...prev, name: value }))} />
-                  <TextInput label="Subtitle" value={categoryDraft.subtitle} onChange={(value) => setCategoryDraft((prev) => ({ ...prev, subtitle: value }))} />
+                  <TextInput
+                    label="Category Name"
+                    value={categoryDraft.name}
+                    onChange={(value) =>
+                      setCategoryDraft((prev) => ({ ...prev, name: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Subtitle"
+                    value={categoryDraft.subtitle}
+                    onChange={(value) =>
+                      setCategoryDraft((prev) => ({ ...prev, subtitle: value }))
+                    }
+                  />
                 </>
               ) : null}
 
               {activeModal === "galleryImage" ? (
                 <>
-                  <TextInput label="Picture Title" value={imageDraft.title} onChange={(value) => setImageDraft((prev) => ({ ...prev, title: value }))} />
+                  <TextInput
+                    label="Picture Title"
+                    value={imageDraft.title}
+                    onChange={(value) =>
+                      setImageDraft((prev) => ({ ...prev, title: value }))
+                    }
+                  />
                   <label className="block">
-                    <span className="text-xs font-black uppercase tracking-[0.12em] text-slate-500">Category</span>
-                    <select value={imageDraft.categoryId} onChange={(event) => setImageDraft((prev) => ({ ...prev, categoryId: event.target.value }))} className="mt-1 h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-bold outline-none focus:border-teal-500">
-                      {galleryCategories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
+                    <span className="text-xs font-black uppercase tracking-[0.12em] text-slate-500">
+                      Category
+                    </span>
+                    <select
+                      value={imageDraft.categoryId}
+                      onChange={(event) =>
+                        setImageDraft((prev) => ({
+                          ...prev,
+                          categoryId: event.target.value,
+                        }))
+                      }
+                      className="mt-1 h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-bold outline-none focus:border-teal-500"
+                    >
+                      {galleryCategories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.name}
+                        </option>
+                      ))}
                     </select>
                   </label>
-                  <TextInput label="Picture Link" value={imageDraft.imageUrl} onChange={(value) => setImageDraft((prev) => ({ ...prev, imageUrl: value }))} />
-                  <TextInput label="Click Link" value={imageDraft.link} onChange={(value) => setImageDraft((prev) => ({ ...prev, link: value }))} />
+                  <TextInput
+                    label="Picture Link"
+                    value={imageDraft.imageUrl}
+                    onChange={(value) =>
+                      setImageDraft((prev) => ({ ...prev, imageUrl: value }))
+                    }
+                  />
+                  <TextInput
+                    label="Click Link"
+                    value={imageDraft.link}
+                    onChange={(value) =>
+                      setImageDraft((prev) => ({ ...prev, link: value }))
+                    }
+                  />
                   <label className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-black text-slate-700 transition hover:bg-slate-50">
                     <ImagePlus className="h-4 w-4" />
                     Upload From Device
-                    <input type="file" accept="image/*" className="hidden" onChange={(event) => readImageFile(event, (url) => setImageDraft((prev) => ({ ...prev, imageUrl: url })))} />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(event) =>
+                        readImageFile(event, (url) =>
+                          setImageDraft((prev) => ({ ...prev, imageUrl: url })),
+                        )
+                      }
+                    />
                   </label>
                 </>
               ) : null}
