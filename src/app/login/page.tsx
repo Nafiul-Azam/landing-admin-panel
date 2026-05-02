@@ -99,9 +99,15 @@ export default function LoginPage() {
 
   const handlePhoneLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setPasswordError("");
 
     if (!bdPhonePattern.test(cleanPhone)) {
       setPhoneError("Use a valid Bangladesh phone number, like 017XXXXXXXX");
+      return;
+    }
+
+    if (!password.trim()) {
+      setPasswordError("Password is required");
       return;
     }
 
@@ -226,6 +232,7 @@ export default function LoginPage() {
                       onClick={() => {
                         setMode("email");
                         setPhoneError("");
+                        setPasswordError("");
                       }}
                       className={`flex h-11 items-center justify-center gap-2 rounded-lg text-sm font-bold transition ${
                         mode === "email"
@@ -426,6 +433,73 @@ export default function LoginPage() {
                           </span>
                         )}
                       </label>
+
+                      <label className="block">
+                        <span className="mb-2 block text-sm font-semibold text-slate-700">
+                          Password
+                        </span>
+
+                        <div className="group relative">
+                          <LockKeyhole className="pointer-events-none absolute left-4 top-1/2 z-10 h-5 w-5 -translate-y-1/2 text-slate-400 transition group-focus-within:text-sky-600" />
+
+                          <input
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(event) => {
+                              setPassword(event.target.value);
+                              if (passwordError) setPasswordError("");
+                            }}
+                            placeholder="Enter your password"
+                            className={`${inputClass} ${
+                              passwordError
+                                ? "border-rose-300 focus:border-rose-500 focus:shadow-[0_0_0_1px_rgba(244,63,94,0.45)]"
+                                : "border-slate-200"
+                            }`}
+                          />
+
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword((value) => !value)}
+                            aria-label={
+                              showPassword ? "Hide password" : "Show password"
+                            }
+                            className="absolute right-2.5 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 active:scale-95"
+                          >
+                            {showPassword ? (
+                              <EyeOff className="h-5 w-5" />
+                            ) : (
+                              <Eye className="h-5 w-5" />
+                            )}
+                          </button>
+                        </div>
+
+                        {passwordError ? (
+                          <span className="mt-2 block text-sm font-medium text-rose-600">
+                            {passwordError}
+                          </span>
+                        ) : null}
+                      </label>
+
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <label className="flex cursor-pointer select-none items-center gap-2 text-sm font-medium text-slate-600">
+                          <input
+                            type="checkbox"
+                            checked={rememberMe}
+                            onChange={(event) =>
+                              setRememberMe(event.target.checked)
+                            }
+                            className="h-4 w-4 rounded border-slate-300 accent-slate-950"
+                          />
+                          Remember me
+                        </label>
+
+                        <Link
+                          href="/forgot-password"
+                          className="text-sm font-semibold text-sky-700 transition hover:text-sky-950 hover:underline"
+                        >
+                          Forgot password?
+                        </Link>
+                      </div>
 
                       <button
                         type="submit"

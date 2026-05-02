@@ -266,7 +266,7 @@ export default function SettingsAdminPanel() {
   const [autoSave, setAutoSave] = useState(true);
   const [maintenanceMode, setMaintenanceMode] = useState(false);
   const [toast, setToast] = useState("Ready to manage settings");
-  const [currentTime, setCurrentTime] = useState(Date.now());
+  const [currentTime, setCurrentTime] = useState(0);
 
   const [notificationPermission, setNotificationPermission] =
     useState<DesktopNotificationPermission>("default");
@@ -326,72 +326,80 @@ export default function SettingsAdminPanel() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (!("Notification" in window)) {
-      setNotificationPermission("unsupported");
-      return;
-    }
+    const timer = window.setTimeout(() => {
+      if (!("Notification" in window)) {
+        setNotificationPermission("unsupported");
+        return;
+      }
 
-    setNotificationPermission(Notification.permission);
+      setNotificationPermission(Notification.permission);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    try {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
+    const timer = window.setTimeout(() => {
+      try {
+        const saved = window.localStorage.getItem(STORAGE_KEY);
 
-      if (saved) {
-        const parsed = JSON.parse(saved);
+        if (saved) {
+          const parsed = JSON.parse(saved);
 
-        if (typeof parsed.autoSave === "boolean") {
-          setAutoSave(parsed.autoSave);
+          if (typeof parsed.autoSave === "boolean") {
+            setAutoSave(parsed.autoSave);
+          }
+
+          if (typeof parsed.maintenanceMode === "boolean") {
+            setMaintenanceMode(parsed.maintenanceMode);
+          }
+
+          if (typeof parsed.profileName === "string") {
+            setProfileName(parsed.profileName);
+          }
+
+          if (typeof parsed.profileRole === "string") {
+            setProfileRole(parsed.profileRole);
+          }
+
+          if (typeof parsed.profilePhone === "string") {
+            setProfilePhone(parsed.profilePhone);
+          }
+
+          if (typeof parsed.profileEmail === "string") {
+            setProfileEmail(parsed.profileEmail);
+          }
+
+          if (typeof parsed.profileImage === "string") {
+            setProfileImage(parsed.profileImage);
+          }
+
+          if (typeof parsed.imageUrl === "string") {
+            setImageUrl(parsed.imageUrl);
+          }
+
+          if (
+            parsed.imagePosition &&
+            typeof parsed.imagePosition.x === "number" &&
+            typeof parsed.imagePosition.y === "number"
+          ) {
+            setImagePosition(parsed.imagePosition);
+          }
+
+          if (Array.isArray(parsed.accessControls)) {
+            setAccessControls(parsed.accessControls);
+          }
         }
-
-        if (typeof parsed.maintenanceMode === "boolean") {
-          setMaintenanceMode(parsed.maintenanceMode);
-        }
-
-        if (typeof parsed.profileName === "string") {
-          setProfileName(parsed.profileName);
-        }
-
-        if (typeof parsed.profileRole === "string") {
-          setProfileRole(parsed.profileRole);
-        }
-
-        if (typeof parsed.profilePhone === "string") {
-          setProfilePhone(parsed.profilePhone);
-        }
-
-        if (typeof parsed.profileEmail === "string") {
-          setProfileEmail(parsed.profileEmail);
-        }
-
-        if (typeof parsed.profileImage === "string") {
-          setProfileImage(parsed.profileImage);
-        }
-
-        if (typeof parsed.imageUrl === "string") {
-          setImageUrl(parsed.imageUrl);
-        }
-
-        if (
-          parsed.imagePosition &&
-          typeof parsed.imagePosition.x === "number" &&
-          typeof parsed.imagePosition.y === "number"
-        ) {
-          setImagePosition(parsed.imagePosition);
-        }
-
-        if (Array.isArray(parsed.accessControls)) {
-          setAccessControls(parsed.accessControls);
-        }
+      } catch {
+        setToast("Saved settings could not be loaded");
+      } finally {
+        setStorageLoaded(true);
       }
-    } catch {
-      setToast("Saved settings could not be loaded");
-    } finally {
-      setStorageLoaded(true);
-    }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -431,11 +439,18 @@ export default function SettingsAdminPanel() {
   ]);
 
   useEffect(() => {
+    const initialTimer = window.setTimeout(() => {
+      setCurrentTime(Date.now());
+    }, 0);
+
     const timer = window.setInterval(() => {
       setCurrentTime(Date.now());
     }, 30000);
 
-    return () => window.clearInterval(timer);
+    return () => {
+      window.clearTimeout(initialTimer);
+      window.clearInterval(timer);
+    };
   }, []);
 
   useEffect(() => {
@@ -448,26 +463,30 @@ export default function SettingsAdminPanel() {
 
     if (expiredItems.length === 0) return;
 
-    setAccessControls((previous) =>
-      previous.map((item) => {
-        if (
-          !item.enabled &&
-          item.disabledUntil !== null &&
-          item.disabledUntil <= currentTime
-        ) {
-          return {
-            ...item,
-            enabled: true,
-            disabledUntil: null,
-            lastAction: "Automatically enabled after disable duration ended",
-          };
-        }
+    const timer = window.setTimeout(() => {
+      setAccessControls((previous) =>
+        previous.map((item) => {
+          if (
+            !item.enabled &&
+            item.disabledUntil !== null &&
+            item.disabledUntil <= currentTime
+          ) {
+            return {
+              ...item,
+              enabled: true,
+              disabledUntil: null,
+              lastAction: "Automatically enabled after disable duration ended",
+            };
+          }
 
-        return item;
-      }),
-    );
+          return item;
+        }),
+      );
 
-    showToast(`${expiredItems.length} access automatically enabled`);
+      showToast(`${expiredItems.length} access automatically enabled`);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, [currentTime, accessControls]);
 
   async function enableDesktopNotifications() {
