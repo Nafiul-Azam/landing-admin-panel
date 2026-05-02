@@ -17,7 +17,6 @@ import {
   UserCheck,
   X,
 } from "lucide-react";
-("lucide-react");
 
 type AppointmentStatus = "Pending" | "Confirmed" | "Completed" | "Cancelled";
 
